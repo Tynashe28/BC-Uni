@@ -26,13 +26,13 @@ public class StudentService implements com.bc.uni.services.interfaces.StudentSer
     public Student findStudentByStudentId(long id){
 
         return Optional.ofNullable(studentRepository.findStudentByStudentId(id)).orElseThrow(
-                ()-> new ResourceNotFoundException("Student","StudentId",id)
+                ()-> new ResourceNotFoundException("Student","StudentId",Long.toString(id))
         );
     }
     @Override
     public Student updateStudent(Student student, long id){
         Student existingStudent = studentRepository.findById(id).orElseThrow(
-                ()-> new ResourceNotFoundException("Student","id",id)
+                ()-> new ResourceNotFoundException("Student","id",Long.toString(id))
         );
 
         existingStudent.setEmail(student.getEmail());
@@ -44,7 +44,7 @@ public class StudentService implements com.bc.uni.services.interfaces.StudentSer
     @Override
     public void deleteStudent(long id){
         Student student = studentRepository.findById(id).orElseThrow(
-                ()-> new ResourceNotFoundException("Student", "id", id)
+                ()-> new ResourceNotFoundException("Student", "id", Long.toString(id))
         );
         studentRepository.delete(student);
     }

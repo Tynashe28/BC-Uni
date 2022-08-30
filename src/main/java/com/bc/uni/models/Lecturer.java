@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Data @Builder @NoArgsConstructor @AllArgsConstructor @Entity @Table(
         name = "tbl_lecturer"
@@ -22,6 +24,11 @@ public class Lecturer implements Serializable {
             name = "lecturer_sequence",
             sequenceName = "lecturer_sequence"
     )
-    private long id;
+    private Long id;
     private String name;
+    private String password;
+    private String username;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    Collection<Role> roles = new ArrayList<>();
 }
