@@ -27,7 +27,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 @Data @Service @Slf4j @Transactional
-public class LecturerService implements com.bc.uni.services.interfaces.LecturerService, UserDetailsService {
+public class LecturerService implements com.bc.uni.services.interfaces.LecturerService {
 
 
     private LecturerRepository lecturerRepository;
@@ -35,17 +35,17 @@ public class LecturerService implements com.bc.uni.services.interfaces.LecturerS
 
     private PasswordEncoder passwordEncoder;
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Lecturer lecturer = lecturerRepository.findLecturerByUsername(username).orElseThrow(
-                ()-> new ResourceNotFoundException("username","v",username)
-        );
-        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        lecturer.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        });
-        return new User(lecturer.getUsername(),lecturer.getPassword(),authorities);
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        Lecturer lecturer = lecturerRepository.findLecturerByUsername(username).orElseThrow(
+//                ()-> new ResourceNotFoundException("username","v",username)
+//        );
+//        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//        lecturer.getRoles().forEach(role -> {
+//            authorities.add(new SimpleGrantedAuthority(role.getName()));
+//        });
+//        return new User(lecturer.getUsername(),lecturer.getPassword(),authorities);
+//    }
 
     @Override
     public Lecturer registerLecturer(Lecturer lecturer) {
